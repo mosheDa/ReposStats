@@ -6,7 +6,6 @@ The Repos API is a RESTful service that allows users to manage repositories. It 
 
 - **User Registration**: Users can register an account.
 - **User Login**: Registered users can log in to their account.
-- **Retrieve Repositories**: Users can retrieve a list of repositories.
 - **Add Favorite Repositories**: Users can add repositories to their favorites.
 - **Retrieve Favorite Repositories**: Users can retrieve their favorite repositories.
 - **Delete Favorite Repositories**: Users can remove repositories from their favorites.
