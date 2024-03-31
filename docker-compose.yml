@@ -12,11 +12,12 @@ services:
       - redis
     environment:
       REDIS_URL: redis://redis:6379
+
   users_api:
     build:
       context: apps/users-api
     ports:
-      - '4000:4000'
+      - '4000:3000'
     env_file:
       - apps/users-api/.env
     depends_on:
@@ -33,3 +34,9 @@ services:
     image: mongo:latest
     ports:
       - '27017:27017'
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
+  
