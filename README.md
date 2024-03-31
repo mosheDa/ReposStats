@@ -15,12 +15,12 @@ Before running the microservices, you need to set up the required environment va
 2. Set the following environment variable:
    - `GITHUB_ACCESS_TOKEN`: GitHub access token used to authenticate with the GitHub API.
 
-Refer to the [Repos API README]([./apps/repos-api/README.md](https://github.com/mosheDa/ReposStats/edit/master/apps/repos-api/README.md)) for detailed instructions.
+Refer to the [Repos API README](https://github.com/mosheDa/ReposStats/blob/master/apps/repos-api/README.md) for detailed instructions.
 
 ### Users Data API
 1. Navigate to the `/apps/users-data-api` directory.
 
-Refer to the [Users Data API README]([./apps/users-data-api/README.md](https://github.com/mosheDa/ReposStats/blob/master/apps/users-api/README.md)) for detailed instructions.
+Refer to the [Users Data API README](https://github.com/mosheDa/ReposStats/blob/master/apps/users-api/README.md) for detailed instructions.
 
 Once you've set up the environment variables for the Repos API microservice, you can proceed with building and running the service using Docker Compose as described in the next section.
 
