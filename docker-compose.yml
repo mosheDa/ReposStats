@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  app:
+  repos_api:
     build:
       context: apps/repos-api
     ports:
@@ -12,8 +12,24 @@ services:
       - redis
     environment:
       REDIS_URL: redis://redis:6379
+  users_api:
+    build:
+      context: apps/users-api
+    ports:
+      - '4000:4000'
+    env_file:
+      - apps/users-api/.env
+    depends_on:
+      - mongodb
+    environment:
+      MONGODB_URL: mongodb://mongodb:27017/users-data
 
   redis:
     image: redis:latest
     ports:
       - '6379:6379'
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
