@@ -51,25 +51,24 @@ The API server will start running at http://localhost:3000 by default.
 
 ### User Registration
 
-- **URL**: POST /auth/register
+- **URL**: POST /users/register
 - **Description**: Registers a new user account.
 
 ### User Login
 
-- **URL**: POST /auth/login
+- **URL**: POST /users/login
 - **Description**: Logs in a registered user and returns a JWT token for authentication.
-
-### Retrieve Repositories
-
-- **URL**: GET /repositories
-- **Description**: Retrieves a list of repositories.
-- **Authentication**: Required
 
 ### Add Favorite Repository
 
-- **URL**: POST /favorites
+- **URL**: `POST /favorites`
 - **Description**: Adds a repository to the user's favorites.
 - **Authentication**: Required
+- **Payload Schema**:
+  ```json
+  {
+    "url": "string"
+  }
 
 ### Retrieve Favorite Repositories
 
