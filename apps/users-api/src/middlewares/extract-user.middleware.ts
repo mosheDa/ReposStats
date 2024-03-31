@@ -14,7 +14,7 @@ export class ExtractUserMiddleware implements NestMiddleware {
       const token = authHeader.split(' ')[1];
       try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET) as any;
-        req.user = { email: decoded.email }; // Assuming email is stored in 'email' field of the JWT payload
+        req.user = { email: decoded.email };
       } catch (error) {
         req.user = null;
       }
