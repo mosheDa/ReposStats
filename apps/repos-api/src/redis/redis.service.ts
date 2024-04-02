@@ -20,7 +20,7 @@ export class RedisService {
   async addRepo(url: string, stars: number) {
     this.logger.log('Acquiring transaction lock...');
 
-    // Use watch to set up optimistic locking
+    // Use watch to set up locking
     await this.redisClient.watch(this.key);
 
     const pipeline = this.redisClient.pipeline();
@@ -30,7 +30,6 @@ export class RedisService {
     // Set the expiration time for the key
     await pipeline.expire(this.key, this.ttl);
 
-    // Execute the pipeline (transaction)
     await pipeline.exec();
 
     this.logger.log('Transaction executed successfully.');
