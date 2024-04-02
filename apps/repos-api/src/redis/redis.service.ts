@@ -18,26 +18,14 @@ export class RedisService {
   }
 
   async addRepo(url: string, stars: number) {
-    // Log that transaction lock is being acquired
     this.logger.log('Acquiring transaction lock...');
 
     // Use watch to set up optimistic locking
     await this.redisClient.watch(this.key);
 
-    // Start the pipeline
     const pipeline = this.redisClient.pipeline();
 
-    // Get the current score of the repository
-    const currentScore = await this.redisClient.zscore(this.key, url);
-
-    // Determine whether to update the score or add a new entry
-    if (currentScore !== null) {
-      // If the repository already exists, update its score
-      await pipeline.zadd(this.key, 'NX', currentScore + stars, url);
-    } else {
-      // If it's a new repository, add it with the given score
-      await pipeline.zadd(this.key, 'NX', stars, url);
-    }
+    await pipeline.zadd(this.key, 'NX', stars, url);
 
     // Set the expiration time for the key
     await pipeline.expire(this.key, this.ttl);
@@ -45,16 +33,8 @@ export class RedisService {
     // Execute the pipeline (transaction)
     await pipeline.exec();
 
-    // Log that the transaction has been executed
     this.logger.log('Transaction executed successfully.');
-
-    // Log that transaction lock is released
     this.logger.log('Releasing transaction lock...');
-
-    // Explanation of why transaction lock is used to block other operations
-    this.logger.log(
-      'This transaction lock is used to block other operations temporarily while this transaction is in progress.',
-    );
   }
 
   async getTopStarredRepos(start: number, end: number): Promise<IRepo[]> {
